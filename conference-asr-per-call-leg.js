@@ -623,7 +623,7 @@ app.post('/rtc', async(req, res) => {
 });
  
 
-//--- If this application is hosted on VCR (Vonage Code Runtime) serverless infrastructure (aka Neru) --------
+//--- If this application is hosted on VCR (Vonage Cloud Runtime) serverless infrastructure --------
 
 app.get('/_/health', async(req, res) => {
 
