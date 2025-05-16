@@ -67,7 +67,7 @@ if (process.env.RECORD_CALLS == 'true') {
 }
 
 //---- Custom settings ---
-const maxCallDuration = process.env.MAX_CALL_DURATION || 15; // in seconds, limit outbound call duration for demos purposes
+const maxCallDuration = process.env.MAX_CALL_DURATION || 300; // in seconds, limit outbound call duration for demos purposes
 
 //----- WebSocket server (connector server) ---------------
 const processorServer = process.env.PROCESSOR_SERVER;
@@ -357,7 +357,7 @@ app.get('/call', async(req, res) => {
        type: 'phone',
        number: servicePhoneNumber
       },
-      limit: maxCallDuration, // limit outbound call duration for demos purposes
+      length_timer: maxCallDuration, // limit outbound call duration for demos purposes
       answer_url: ['https://' + hostName + '/answer_2'],
       answer_method: 'GET',
       event_url: ['https://' + hostName + '/event_2'],
