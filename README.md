@@ -14,9 +14,9 @@ SIP calls with [SIP endpoints](https://developer.vonage.com/en/voice/voice-api/c
 
 This application connects voice calls to the ASR Connector server by using the [WebSockets feature](https://developer.vonage.com/en/voice/voice-api/concepts/websockets) of Vonage Voice API.</br>
 
-When a new voice call is established and attached to a conference, this Voice API application triggers a WebSocket connection from Vonage platform to the Connector server which streams audio from the participant's call leg to the ASR engine. 
+When a new voice call is established and attached to a conference, this Voice API application triggers a WebSocket connection from Vonage platform to the ASR Connector server which streams audio from the participant's call leg to the ASR engine. 
 
-Instead of using this sample Voice API application, you may use your own existing Voice API application to establish WebSockets with the ASR Connector server to connect your managed voice calls with the AI engines.
+Instead of using this sample Voice API application, you may use your own existing Voice API application to establish WebSockets with the ASR Connector server to connect your managed voice calls with the ASR engine.
 
 Your new or existing Voice API application may be written with any programming language using [server SDKs](https://developer.vonage.com/en/tools) or with direct [REST API](https://developer.vonage.com/en/api/voice) calls.
 
@@ -33,7 +33,7 @@ https://github.com/nexmo-se/deepgram-connector</br>
 
 _Note:
 The current repository https://github.com/nexmo-se/vonage-deepgram-voice-agent combines both a sample Voice API application and the Connector application in one server program.<br>
-As of now, you may use only the Connector part of it with your existing Voice API application or this sample application to connect to Deepgram ASR engine. Change its listening port from 8000 to 6000.<br>
+As of now, you may use only the Connector part of it with your existing Voice API application or this sample Voice API application to connect to Deepgram ASR engine. Change its listening port from 8000 to 6000.<br>
 Soon, the standalone Connector application for Deepgram ASR engine will be created._
 
 If you plan to test using a `Local deployment`, you may use ngrok (an Internet tunneling service) for both<br>
@@ -50,7 +50,7 @@ one to forward to the local port 6000 (as the Connector application will be list
 the other one to the local port 8000 for this Voice API application.
 
 Start ngrok to start both tunnels that forward to local ports 6000 and 8000, e.g.<br>
-`ngrok start httpbin demo` (per this [sample yaml configuration file](https://ngrok.com/docs/agent/config/v2/#define-two-tunnels-named-httpbin-and-demo), but needs port 6000 and 8000 as actual values)
+`ngrok start httpbin demo` (per this [sample yaml configuration file](https://ngrok.com/docs/agent/config/v2/#define-two-tunnels-named-httpbin-and-demo), but needs ports 6000 and 8000 as actual values)
 
 please take note of the ngrok Enpoint URL that forwards to local port 6000 as it will be needed here for this Voice API application, that URL looks like:
 `xxxxxxxx.ngrok.xxx` (for ngrok), or `myserver.mycompany.com:32000`<br>
@@ -60,7 +60,7 @@ that host name to specify must not have leading protocol text such as `https://`
 
 ### Set up your Vonage Voice API application credentials and phone number
 
-[Log in to your](https://dashboard.nexmo.com/sign-in) or [sign up for a](https://dashboard.nexmo.com/sign-up) Vonage APIs account.
+[Log in to your](https://dashboard.nexmo.com/sign-in) or [sign up for a](https://ui.idp.vonage.com/ui/auth/registration) Vonage APIs account.
 
 Go to [Your applications](https://dashboard.nexmo.com/applications), access an existing application or [+ Create a new application](https://dashboard.nexmo.com/applications/new).
 
