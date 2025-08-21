@@ -419,7 +419,7 @@ app.get('/answer_2', async(req, res) => {
   const nccoResponse = [
       {
         "action": "talk",
-        "text": "Hello this is call from your preferred provider. Enter a conference number, between one and six digit long",
+        "text": "Hello this is a call from your preferred provider. Enter a conference number, between one and six digit long",
         "bargeIn": true,
         "language": "en-US",
         "style": 0
