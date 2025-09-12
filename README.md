@@ -20,13 +20,13 @@ Instead of using this sample Voice API application, you may use your own existin
 
 Your new or existing Voice API application may be written with any programming language using [server SDKs](https://developer.vonage.com/en/tools) or with direct [REST API](https://developer.vonage.com/en/api/voice) calls.
 
-You may also have your Vonage [Video API WebRTC Clients](https://developer.vonage.com/en/tools) establish sessions with the ASR engine using the Video API's[Audio Connector](https://developer.vonage.com/en/video/guides/audio-connector) and the peer Connector server as listed in the next section, in which case this Voice API application is not needed.
+You may also have your Vonage [Video API WebRTC Clients](https://developer.vonage.com/en/tools) establish sessions with the ASR engine using the Video API's [Audio Connector](https://developer.vonage.com/en/video/guides/audio-connector) and the peer Connector server as listed in the next section, in which case this Voice API application is not needed.
 
 ## Set up
 
 ### Set up the ASR Connector server - Host server public hostname and port
 
-First set up the Connector server from the repository</br>
+First set up the ASR Connector server from the repository</br>
 https://github.com/nexmo-se/deepgram-connector</br>
 
 Default local (not public!) of the Connector server `port` is: 6000.
@@ -34,7 +34,7 @@ Default local (not public!) of the Connector server `port` is: 6000.
 If you plan to test using a `Local deployment`, you may use ngrok (an Internet tunneling service) for both<br>
 this Voice API application<br>
 and the Connector application<br>
-with [multiple ngrok endpoints](https://ngrok.com/docs/agent/config/v2/#tunnel-configurations).
+with [multiple ngrok tunnels](https://ngrok.com/docs/agent/config/v2/#tunnel-configurations).
 
 To do that, [install ngrok](https://ngrok.com/downloads).<br>
 Log in or sign up with [ngrok](https://ngrok.com/),<br>
