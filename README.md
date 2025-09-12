@@ -20,21 +20,16 @@ Instead of using this sample Voice API application, you may use your own existin
 
 Your new or existing Voice API application may be written with any programming language using [server SDKs](https://developer.vonage.com/en/tools) or with direct [REST API](https://developer.vonage.com/en/api/voice) calls.
 
-You may also have your Vonage [Video API WebRTC Clients](https://tokbox.com/developer/sdks/js/) establish sessions with the ASR engine using the [Audio Connector](https://tokbox.com/developer/guides/audio-connector) functionality of the Video API platform to the ASR Connector server as listed in the next section.
-
+You may also have your Vonage [Video API WebRTC Clients](https://developer.vonage.com/en/tools) establish sessions with the ASR engine using the Video API's[Audio Connector](https://developer.vonage.com/en/video/guides/audio-connector) and the peer Connector server as listed in the next section, in which case this Voice API application is not needed.
 
 ## Set up
 
 ### Set up the ASR Connector server - Host server public hostname and port
 
-First set up the Connector server (aka middleware server) from the repository</br>
+First set up the Connector server from the repository</br>
 https://github.com/nexmo-se/deepgram-connector</br>
 
-
-_Note:
-The current repository https://github.com/nexmo-se/vonage-deepgram-voice-agent combines both a sample Voice API application and the Connector application in one server program.<br>
-As of now, you may use only the Connector part of it with your existing Voice API application or this sample Voice API application to connect to Deepgram ASR engine. Change its listening port from 8000 to 6000.<br>
-Soon, the standalone Connector application for Deepgram ASR engine will be created._
+Default local (not public!) of the Connector server `port` is: 6000.
 
 If you plan to test using a `Local deployment`, you may use ngrok (an Internet tunneling service) for both<br>
 this Voice API application<br>
@@ -45,16 +40,18 @@ To do that, [install ngrok](https://ngrok.com/downloads).<br>
 Log in or sign up with [ngrok](https://ngrok.com/),<br>
 from the ngrok web UI menu, follow the **Setup and Installation** guide.
 
-Set up two domains,<br>
+Set up two tunnels,<br>
 one to forward to the local port 6000 (as the Connector application will be listening on port 6000),<br>
-the other one to the local port 8000 for this Voice API application.
+the other one to the local port 8000 for this Voice API application,<br>
+see this [sample yaml configuration file](https://ngrok.com/docs/agent/config/v2/#define-two-tunnels-named-httpbin-and-demo), but it needs port 6000 and 8000 as actual values,<br>
+depending if you have a paid ngrok account or not, you may or may not be able to set (static) domain names.
 
 Start ngrok to start both tunnels that forward to local ports 6000 and 8000, e.g.<br>
-`ngrok start httpbin demo` (per this [sample yaml configuration file](https://ngrok.com/docs/agent/config/v2/#define-two-tunnels-named-httpbin-and-demo), but needs ports 6000 and 8000 as actual values)
+`ngrok start httpbin demo`
 
-please take note of the ngrok Enpoint URL that forwards to local port 6000 as it will be needed here for this Voice API application, that URL looks like:
-`xxxxxxxx.ngrok.xxx` (for ngrok), or `myserver.mycompany.com:32000`<br>
-(as **`PROCESSOR_SERVER`** in one of the next sections),<br>
+please take note of the ngrok Enpoint URL that forwards to local port 6000 as it will be needed here for this Voice API application environment variable as **`PROCESSOR_SERVER`** in one of the next sections, that URL looks like:<br>
+`xxxxxxxx.ngrok.xxx` (for ngrok),<br>
+or `myserver.mycompany.com:32000` (public host name and port of your Connector application server)<br>
 no `port` is necessary with ngrok as public host name,<br>
 that host name to specify must not have leading protocol text such as `https://`, `wss://`, nor trailing `/`.
 
@@ -66,15 +63,22 @@ Go to [Your applications](https://dashboard.nexmo.com/applications), access an e
 
 Under Capabilities section (click on [Edit] if you do not see this section):
 
-Enable Voice
-- Under Answer URL, leave HTTP GET, and enter https://\<host\>:\<port\>/answer (replace \<host\> and \<port\> with the public host name and if necessary public port of the server where this sample application is running)</br>
-- Under Event URL, **select** HTTP POST, and enter https://\<host\>:\<port\>/event (replace \<host\> and \<port\> with the public host name and if necessary public port of the server where this sample application is running)</br>
+**Enable** Voice
+- Under Answer URL, leave HTTP GET, and enter</br>
+https://\<host\>:\<port\>/answer</br>
+(replace \<host\> and \<port\> with the public host name and if necessary public port of the server where this sample application is running)</br>
+- Under Event URL, **select** HTTP POST, and enter</br>
+https://\<host\>:\<port\>/event</br>
+(replace \<host\> and \<port\> with the public host name and if necessary public port of the server where this sample application is running)</br>
 Note: If you are using ngrok for this sample application, the answer URL and event URL look like:</br>
-https://yyyyyyyy.ngrok.io/answer</br>
-https://yyyyyyyy.ngrok.io/event</br> 	
+https://yyyyyyyy.ngrok.xxx/answer</br>
+https://yyyyyyyy.ngrok.xxx/event</br> 	
 - Click on [Generate public and private key] if you did not yet create or want new ones, save the private key file in this application folder as .private.key (leading dot in the file name).</br>
-**IMPORTANT**: Do not forget to click on [Save changes] at the bottom of the screen if you have created a new key set.</br>
-- Link a phone number to this application if none has been linked to the application.
+- Click on [Generate new application] if you've just created the application.</br></br>
+
+**IMPORTANT**: If you already had an existing application and just created a new key set, do not forget to click on [Save changes] at the bottom of the screen.</br></br>
+
+- Link a phone number to this application if none has been linked to the application.</br>
 
 Please take note of your **application ID** and the **linked phone number** (as they are needed in the very next section).
 
@@ -82,7 +86,7 @@ For the next steps, you will need:</br>
 - Your [Vonage API key](https://dashboard.nexmo.com/settings) (as **`API_KEY`**)</br>
 - Your [Vonage API secret](https://dashboard.nexmo.com/settings), not signature secret, (as **`API_SECRET`**)</br>
 - Your `application ID` (as **`APP_ID`**),</br>
-- The **`phone number linked`** to your application (as **`SERVICE_PHONE_NUMBER`**), your phone will **call that number**,</br>
+- The **`phone number linked`** to your application (as **`SERVICE_PHONE_NUMBER`**), your phone will **call that number**.</br>
 
 ### Local deployment
 
